@@ -26,11 +26,6 @@ let velocidadeYOponente;
 let meusPontos = 0;
 let pontosDoOponente = 0;
 
-// Variáveis Controle Multiplayer
-let button;
-let modo;
-let multiplayer = false;
-
 function setup() {
   createCanvas(600, 400);
 }
@@ -41,15 +36,15 @@ function draw() {
   mostraRaquete(xRaquete, yRaquete);
   mostraRaquete(xRaqueteOponente, yRaqueteOponente);
   mostraRede();
+  mostraPlacar();
   movimentaBolinha();
   movimentaRaquete();
+  movimentaRaqueteOponente()
   verificaColisaoBorda();
   verificaColisaoRaquete(xRaquete, yRaquete);
   verificaColisaoRaquete(xRaqueteOponente, yRaqueteOponente);
-  mudaMultiplayer()
-  mostraPlacar();
   marcaPontos();
-  mostraBotao()
+  bolinhaNaoFicaPresa()
 }
 
 function mostraBolinha() {
@@ -67,24 +62,15 @@ function movimentaBolinha() {
 }
 
 function movimentaRaquete() {
-  if (keyIsDown(87)) {
+  if (keyIsDown(UP_ARROW)) {
     yRaquete -= 10;
   }
-  if (keyIsDown(83)) {
+  if (keyIsDown(DOWN_ARROW)) {
     yRaquete += 10;
   }
   yRaquete = constrain(yRaquete, 10, 290);
 }
 
-function movimentaRaqueteP2() {
-  if (keyIsDown(UP_ARROW)) {
-    yRaqueteOponente -= 10;
-  }
-  if (keyIsDown(DOWN_ARROW)) {
-    yRaqueteOponente += 10;
-  }
-  yRaquete = constrain(yRaquete, 10, 290);
-}
 
 function movimentaRaqueteOponente() {
   velocidadeYOponente =
@@ -143,29 +129,9 @@ function mostraRede() {
   stroke(150);
 }
 
-
-function mudaMultiplayer() {
-  if(multiplayer){
-    movimentaRaqueteP2()
-    modo = 'multiplayer'
-  } else {
-    movimentaRaqueteOponente();
-    modo = 'solo'
-  }
-}
-
-function mostraBotao(){
-  button = createButton(modo)
-  button.position(890, 120)
-  button.mousePressed(mudaModo)
-}
-
-function mudaModo(){
-  console.log('pegou')
-  if (!multiplayer) {
-    multiplayer = true
-  } else {
-    multiplayer = false
+function bolinhaNaoFicaPresa(){
+  if (xBolinha + raio < 0){
+  xBolinha = 300
   }
 }
 

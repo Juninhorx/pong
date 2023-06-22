@@ -5,9 +5,16 @@ html, body {
 
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0;
     margin: 0;
     background-color: #1b1b1b;
-  }
+}
+
+h2 {
+    color: rgb(163, 163, 163);
+    font-family: monospace;
+    font-weight: 200;
+}
